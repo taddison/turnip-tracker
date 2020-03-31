@@ -21,3 +21,7 @@
 
 - Clone the repo
 - `yarn dev`
+
+## Refs
+- Secrets in local development: https://zeit.co/docs/v2/serverless-functions/env-and-secrets/#during-local-development
+  - In the future -> https://zeit.co/docs/v2/serverless-functions/env-and-secrets/#adding-secrets
