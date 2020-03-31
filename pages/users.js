@@ -1,10 +1,16 @@
 import Head from "next/head";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import useSWR, { mutate } from "swr";
+import * as Yup from "yup";
 
 const ApiRoutes = {
   User: "/api/user"
 }
+
+const CreateUserSchema = Yup.object().shape({
+  island: Yup.string().required(),
+  name: Yup.string().required()
+});
 
 const fetcher = (...args) => {
   return fetch(...args).then(res => res.json());
@@ -12,7 +18,6 @@ const fetcher = (...args) => {
 
 const Home = () => {
   const { data: users } = useSWR(ApiRoutes.User, fetcher)
-  console.log(users);
   
   const createUser = async (name, island) => {
     await fetch(ApiRoutes.User, {
@@ -43,16 +48,7 @@ const Home = () => {
       </div>
       <Formik
         initialValues={{ name: "", island: "" }}
-        validate={values => {
-          const errors = {};
-          if (!values.island) {
-            errors.island = "You must have an island";
-          }
-          if (!values.name) {
-            errors.name = "You must have a name";
-          }
-          return errors;
-        }}
+        validationSchema={CreateUserSchema}
         onSubmit={async (values, { setSubmitting, resetForm }) => {
           await createUser(values.name, values.island);
           resetForm();
