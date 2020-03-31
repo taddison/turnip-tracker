@@ -18,3 +18,9 @@ type Transaction {
   quantity: Int!
   priceEntry: PriceEntry!
 }
+
+type Query {
+  users: [User]
+  prices: [PriceEntry]
+  transactions: [Transaction]
+}

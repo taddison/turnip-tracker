@@ -5,6 +5,8 @@ export default async (req, res) => {
     case "POST":
       await handlePost(req, res);
       break;
+    case "GET":
+      await handleGet(req, res);
     default:
       console.log(`Welp, don't know how to handle ${req.method}`);
       res.status(500).end();
@@ -20,6 +22,27 @@ const getHeaders = () => {
     "Content-type": "application/json",
     Accept: "application/json"
   };
+};
+
+const handleGet = async (req, res) => {
+  const query = `query Users { 
+    users {
+      users: data {
+        _id
+        island
+        name
+      }
+    }
+  }`;
+
+  const result = await fetch(process.env.FAUNA_GRAPHQL_ENDPOINT, {
+    method: "POST",
+    headers: getHeaders(),
+    body: JSON.stringify({ query })
+  });
+  const json = await result.json()
+
+  res.status(200).json(json.data.users);
 };
 
 const handlePost = async (req, res) => {
