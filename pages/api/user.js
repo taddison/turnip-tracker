@@ -2,7 +2,7 @@ import fetch from "isomorphic-unfetch";
 
 export default async (req, res) => {
   switch (req.method) {
-    case "GET":
+    case "POST":
       await handlePost(req, res);
       break;
     default:

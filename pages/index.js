@@ -1,14 +1,12 @@
-import Head from 'next/head'
+import Head from "next/head";
 
 const Home = () => (
   <>
-  <Head>
-    <title>Turnip Tracker</title>
-  </Head>
-  <div>
-    Turnips?
-  </div>
+    <Head>
+      <title>Turnip Tracker</title>
+    </Head>
+    <div>Turnips?</div>
   </>
-)
+);
 
-export default Home
+export default Home;
