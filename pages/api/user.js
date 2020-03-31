@@ -7,6 +7,7 @@ export default async (req, res) => {
       break;
     case "GET":
       await handleGet(req, res);
+      break;
     default:
       console.log(`Welp, don't know how to handle ${req.method}`);
       res.status(500).end();
