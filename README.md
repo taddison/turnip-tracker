@@ -9,5 +9,15 @@
 
 ## Building
 
-- Clone
+### Database Setup
+
+- Create a database on fauna (https://dashboard.fauna.com/)
+- Import the graphql schema file `schema.gql`
+- Create a new role (security -> manage roles), grant CRUD on all three collections (Transaction, User, PriceEntry)
+- Create a new key in the role
+- Place this key in a `.env.local` file, with the name `FAUNA_SECRET`.  See `.env.sample` for an example.
+
+### Running the app
+
+- Clone the repo
 - `yarn dev`
