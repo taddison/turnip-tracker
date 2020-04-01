@@ -16,7 +16,7 @@ type PriceEntry {
 type Transaction {
   user: User!
   quantity: Int!
-  priceEntry: PriceEntry!
+  price: Int!
 }
 
 type Query {
