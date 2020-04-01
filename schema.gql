@@ -1,11 +1,12 @@
 type User {
   island: String!
   name: String!
+  prices: [Price!] @relation
+  transactions: [Transaction!] @relation
 }
 
-type PriceEntry {
+type Price {
   user: User!
-  story: String!
   weekStart: Date!
   isMorning: Boolean!
   price: Int!
@@ -21,6 +22,6 @@ type Transaction {
 
 type Query {
   users: [User]
-  prices: [PriceEntry]
+  prices: [Price]
   transactions: [Transaction]
 }

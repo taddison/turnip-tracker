@@ -1,9 +1,9 @@
 import Head from "next/head";
 import { Formik, Form, Field, ErrorMessage } from "formik";
-import useSWR, { mutate } from "swr";
 import * as Yup from "yup";
+import useSWR, { mutate } from "swr";
 import fetcher from "../lib/fetcher";
-import ApiRoutes from "../consts/apiRoutes";
+import ApiRoutes from "../consts/ApiRoutes";
 
 const CreateUserSchema = Yup.object().shape({
   island: Yup.string().required(),
