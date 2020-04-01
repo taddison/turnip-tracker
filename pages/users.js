@@ -2,21 +2,15 @@ import Head from "next/head";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import useSWR, { mutate } from "swr";
 import * as Yup from "yup";
-
-const ApiRoutes = {
-  User: "/api/user"
-}
+import fetcher from "../lib/fetcher";
+import ApiRoutes from "../consts/apiRoutes";
 
 const CreateUserSchema = Yup.object().shape({
   island: Yup.string().required(),
   name: Yup.string().required()
 });
 
-const fetcher = (...args) => {
-  return fetch(...args).then(res => res.json());
-};
-
-const Home = () => {
+const Users = () => {
   const { data: users } = useSWR(ApiRoutes.User, fetcher)
   
   const createUser = async (name, island) => {
@@ -73,4 +67,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default Users;
