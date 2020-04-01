@@ -21,16 +21,16 @@ const getHeaders = () => {
 };
 
 const handleGet = async (req, res) => {
-  // GET /api/user/4/prices
-  // query.userId = 4
-  // https://nextjs.org/docs/routing/dynamic-routes
-
-  const query = `query Users { 
-    users {
-      users: data {
-        _id
-        island
-        name
+  const query = `query GetPricesByUser($userid: ID!) {
+    user: findUserByID(id: $userid) {
+      prices {
+        data {
+          _id
+          weekStart
+          dayOfWeek
+          isMorning
+          price
+        }
       }
     }
   }`;
@@ -38,9 +38,9 @@ const handleGet = async (req, res) => {
   const result = await fetch(process.env.FAUNA_GRAPHQL_ENDPOINT, {
     method: "POST",
     headers: getHeaders(),
-    body: JSON.stringify({ query })
+    body: JSON.stringify({ query, variables: { userid: req.query.userid } })
   });
   const json = await result.json()
 
-  res.status(200).json(json?.data?.users ?? { users: []});
+  res.status(200).json(json?.data?.user?.prices?.data ?? []);
 };

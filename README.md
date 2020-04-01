@@ -18,7 +18,7 @@
 - Import the graphql schema file `schema.gql`
 - Create a new role (security -> manage roles)
   - Grant CRUD on all three collections (Transaction, User, Price)
-  - Grant read on all thee indexes (transactions, prices, users)
+  - Grant read on all five indexes (transactions, prices, users, price_user_by_user, transaction_user_by_user)
 - Create a new key in the role
 - Place this key in a `.env.local` file, with the name `FAUNA_SECRET`. See `.env.sample` for an example.
 
@@ -45,20 +45,6 @@ mutation CreatePrice {
     }
   ) {
     _id
-  }
-}
-
-query GetPricesByUser {
-  findUserByID(id: "261564896538264084") {
-    _id
-    name
-    prices {
-      data {
-        weekStart
-        isMorning
-        price
-      }
-    }
   }
 }
 ```

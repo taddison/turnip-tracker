@@ -20,7 +20,7 @@ const Prices = () => {
   }, fetcher);
 
   const handleSelectedUserChanged = e => {
-    setSelectedUser(parseInt(e.target.value))
+    setSelectedUser(e.target.value)
   };
 
   return (
@@ -39,7 +39,10 @@ const Prices = () => {
         ))}
       </select>
       <div>
-        {prices ? JSON.stringify(prices) : <div>No price data</div>}
+        {prices ? prices.map(p => {
+            return <div key={p._id}>{p.weekStart} {p.dayOfWeek} {p.isMorning ? "AM" : "PM"} {p.price}</div>
+          }
+        ) : <div>No price data</div>}
       </div>
     </>
   );
